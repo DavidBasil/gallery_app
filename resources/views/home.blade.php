@@ -3,21 +3,19 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
+       
+			<form action="{{ route('album.store') }}" method="post" enctype="multipart/form-data">
+				@csrf
+				<input type="file" name="image" class="form-control">
+				<hr>
+				<button type="submit" class="btn btn-primary">Upload</button>
+			</form>
+			<hr>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+			@foreach($images as $image)
+				<img src="{{ asset('storage/'.$image->name) }}" class="img-thumbnail" alt="">
+			@endforeach
 
-                    You are logged in!
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 @endsection

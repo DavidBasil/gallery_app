@@ -9,6 +9,16 @@ use App\Album;
 class ImageController extends Controller
 {
 	public function index(){
-		return view('')
+		$images = Image::get();
+		return view('home', compact('images'));
+	}
+
+	public function store(Request $request){
+		if($request->hasFile('image')){
+			Image::create([
+				'name' => $request->file('image')->store('uploads', 'public'),
+				'album_id' => 1
+			]);
+		}
 	}
 }
