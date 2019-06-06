@@ -10,7 +10,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -76,5 +76,45 @@
             @yield('content')
         </main>
     </div>
+<script type="text/javascript">
+$(document).ready(function(e){
+
+	$(".btn-add-more").click(function(){
+		var html = $(".copy").html();
+		$(".initial-add-more").after(html);
+	})
+
+	$("body").on("click", ".remove", function(){
+		$(this).parents(".control-group").remove();
+	})
+
+})
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(e){
+
+	$("#form").on("submit", function(e){
+		e.preventDefault();
+	$.ajax({
+		url: '/album',
+		type: 'POST',
+		data: new FormData(this),
+		contentType: false,
+		cache: false,
+		processData: false,
+		success: function(response){
+			$('.show').html(response);
+			$('#form')[0].reset();
+		},
+		error: function(res){
+			alert("Error");
+		}
+	})
+	})
+
+
+})	
+</script>
 </body>
 </html>

@@ -8,6 +8,7 @@ use App\Album;
 
 class ImageController extends Controller
 {
+
 	public function index(){
 		$images = Image::get();
 		return view('home', compact('images'));
@@ -24,5 +25,8 @@ class ImageController extends Controller
 				]);
 			}
 		}
+		return "<div class='alert alert-success'>
+			Album created!
+		</div>";
 	}
 }
