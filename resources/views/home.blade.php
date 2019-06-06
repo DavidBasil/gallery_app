@@ -6,6 +6,8 @@
 		<div class="col-md-8">
 			<div class="show">
 			</div>
+			<div id="errMsg">
+			</div>
 			<div class="card">
 			<div class="card-body">
 				<form action="{{ route('album.store') }}" method="post" id="form">

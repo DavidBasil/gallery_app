@@ -96,6 +96,11 @@ $(document).ready(function(e){
 
 	$("#form").on("submit", function(e){
 		e.preventDefault();
+		var album = $('#album').val();
+		if(album == ''){
+			alert('error')
+			return false
+		}
 	$.ajax({
 		url: '/album',
 		type: 'POST',
@@ -106,9 +111,15 @@ $(document).ready(function(e){
 		success: function(response){
 			$('.show').html(response);
 			$('#form')[0].reset();
+			$("#errMsg").empty();
 		},
-		error: function(res){
-			alert("Error");
+		error: function(data){
+			// console.log(data.responseJSON);
+			var error = data.responseJSON;
+			$("#errMsg").empty();
+			$.each(error.errors, function(key, value){
+				$('#errMsg').append('<p class="text-center text-danger">'+ value+'</p>');
+			})
 		}
 	})
 	})
@@ -116,5 +127,10 @@ $(document).ready(function(e){
 
 })	
 </script>
+<style type="text/css" media="screen">
+.text-danger {
+	color: red;
+}	
+</style>
 </body>
 </html>
