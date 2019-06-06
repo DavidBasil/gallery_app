@@ -14,6 +14,16 @@ class ImageController extends Controller
 		return view('home', compact('images'));
 	}
 
+	public function album(){
+		$albums = Album::with('images')->get();
+		return view('welcome', compact('albums'));
+	}
+
+	public function show($id){
+		$album = Album::findOrFail($id);
+		return $album;
+	}
+
 	public function store(Request $request){
 		$this->validate($request, [
 			'album' => 'required|min:3|max:15',
