@@ -3,6 +3,11 @@
 @section('content')
 
 <div class="container">
+	@if(Session::has('message'))
+		<div class="alert alert-success">
+			{{ Session::get('message') }}
+		</div>
+	@endif
 	<div class="row">
 		@foreach($albums as $album)
 		<div class="col-sm-4">

@@ -21,7 +21,14 @@ class ImageController extends Controller
 
 	public function show($id){
 		$album = Album::findOrFail($id);
-		return $album;
+		return view('gallery', compact('album'));
+	}
+
+	public function destroy(){
+		$id = request('id');
+		$imageDelete = Image::findOrFail($id);
+		$imageDelete->delete();
+		return redirect('/')->with('message', 'Image deleted');
 	}
 
 	public function store(Request $request){
